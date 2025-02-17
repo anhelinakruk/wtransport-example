@@ -6,6 +6,7 @@ namespace: anhelina
 resources:
   - base.yaml
   - routes.yaml
+  - wtransfer.yaml
 
 configMapGenerator:
   - name: config

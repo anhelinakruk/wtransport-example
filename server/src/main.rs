@@ -18,14 +18,15 @@ async fn main() -> Result<()> {
         .with_level(true)
         .init();
 
-    let new_cert = CertificateChain::load_pemfile("/Users/anhelinakruk/certificate.pem").await?;
-    let new_key = PrivateKey::load_pemfile("/Users/anhelinakruk/certificate.key").await?;
+    let new_cert = CertificateChain::load_pemfile("certificate.pem").await?;
+    let new_key = PrivateKey::load_pemfile("certificate.key").await?;
 
     let identity = Identity::new(new_cert, new_key);
 
     let config = ServerConfig::builder()
         .with_bind_default(4433)
         .with_identity(identity)
+        // .with_custom_tls(tls_config)
         .keep_alive_interval(Some(Duration::from_secs(3)))
         .build();
 
