@@ -1,0 +1,11 @@
+[package]
+name = "wtransport-backend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.43.0", features = ["full"] }
+wtransport = "0.5.0"
+tracing = "0.1.41"
+tracing-subscriber = "0.3.19"
+anyhow = "1.0.95"
