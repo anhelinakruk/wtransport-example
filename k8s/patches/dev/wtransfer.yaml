@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example
+  labels:
+    app.kubernetes.io/name: example
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: example
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: example
+    spec:
+      # imagePullSecrets:
+      #   - name: regcred
+      containers:
+        - name: example
+          image: docker.io/anhelinakruk/wtransfer:latest
+          envFrom:
+            - secretRef:
+                name: secret
+            - configMapRef:
+                name: config
+          ports:
+            - containerPort: 4173
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: example
+spec:
+  selector:
+    app.kubernetes.io/name: example
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: 80
+      targetPort: 4173
+    - name: udp
+      protocol: UDP
+      port: 80
+      targetPort: 4173
