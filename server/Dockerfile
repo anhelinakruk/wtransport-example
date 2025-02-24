@@ -8,4 +8,5 @@ COPY ./certificate.pem /app/certs/certificate.pem
 COPY ./certificate.key /app/certs/certificate.key
 
 RUN cargo build --release
+CMD ["cargo", "run", "--release"]
 

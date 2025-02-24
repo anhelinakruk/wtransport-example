@@ -3,7 +3,7 @@
 
   async function connectWebTransport() {
       try {
-          const transport = new WebTransport("https://localhost:4433/");
+          const transport = new WebTransport("https://anhelina.visoft.dev/wtransport");
           await transport.ready;
 
           console.log("Connected to WebTransport server");
