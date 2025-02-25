@@ -1,0 +1,32 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
+metadata:
+  name: wtransport-client
+  # annotations:
+  #   nginx.ingress.kubernetes.io/enable-early-hints: 'false'
+  #   nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
+spec:
+  parentRefs:
+    - kind: Gateway
+      name: nginx
+      namespace: nginx-gateway
+  hostnames:
+    - wtransport.visoft.dev
+  rules:
+    - matches:
+    #     - path:
+    #         type: PathPrefix
+    #         value: "/"
+      # backendRefs:
+      #   - name: axum-server
+      #     port: 3000
+      backendRefs:
+        - name: wtransport-server
+          port: 4433
+    # - matches:
+    #     - path:
+    #         type: PathPrefix
+    #         value: "/"
+    #   backendRefs:
+    #     - name: wtransport-client
+    #       port: 80

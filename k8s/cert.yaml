@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-visoft-dev
+spec:
+  secretName: wildcard-visoft-dev
+  issuerRef:
+    name: visoft-dev-dns01
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.visoft.dev"

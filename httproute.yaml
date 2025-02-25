@@ -1,0 +1,62 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"gateway.networking.k8s.io/v1","kind":"HTTPRoute","metadata":{"annotations":{},"name":"wtransport-client","namespace":"michal"},"spec":{"hostnames":["wtransport.dev"],"parentRefs":[{"kind":"Gateway","name":"nginx-gateway","namespace":"nginx-gateway"}],"rules":[{"backendRefs":[{"name":"axum-server","port":80}],"matches":[{"path":{"value":"/wtransport"}}]},{"backendRefs":[{"name":"wtransport-client","port":80}],"matches":null}]}}
+  creationTimestamp: "2025-02-20T09:58:56Z"
+  generation: 3
+  name: wtransport-client
+  namespace: michal
+  resourceVersion: "9381"
+  uid: 3028cb4a-c502-4602-83f8-18fce95e9154
+spec:
+  hostnames:
+  - wtransport.dev
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: nginx-gateway
+    namespace: nginx-gateway
+  rules:
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: axum-server
+      port: 80
+      weight: 1
+    matches:
+    - path:
+        type: PathPrefix
+        value: /wtransport
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: wtransport-client
+      port: 80
+      weight: 1
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+status:
+  parents:
+  - conditions:
+    - lastTransitionTime: "2025-02-20T11:26:11Z"
+      message: All references are resolved
+      observedGeneration: 3
+      reason: ResolvedRefs
+      status: "True"
+      type: ResolvedRefs
+    - lastTransitionTime: "2025-02-20T11:26:11Z"
+      message: HTTPRoute is not allowed by any listener
+      observedGeneration: 3
+      reason: NotAllowedByListeners
+      status: "False"
+      type: Accepted
+    controllerName: gateway.nginx.org/nginx-gateway-controller
+    parentRef:
+      group: gateway.networking.k8s.io
+      kind: Gateway
+      name: nginx-gateway
+      namespace: nginx-gateway

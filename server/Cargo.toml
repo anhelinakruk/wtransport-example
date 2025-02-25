@@ -1,0 +1,16 @@
+[package]
+name = "wtransport-backend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.7.1"
+tokio = { version = "1.28.1", default-features = false, features = ["rt-multi-thread"] }
+tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
+wtransport = { version = "0.5.0", features = ["self-signed"] }
+tracing = "0.1.41"
+anyhow = "1.0.95"
+server = "0.0.0"
+# tower = { version = "0.5.2", features = ["util"] }
+# tower-http = { version = "0.6", features = ["cors", "fs", "trace"] }
+# axum-server = { version = "0.7", features = ["tls-rustls"] }
